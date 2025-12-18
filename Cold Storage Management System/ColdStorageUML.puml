@@ -1,0 +1,188 @@
+@startuml
+class ColdStorage {
+- Floor[] floors
+- ArrayList<Customer> customers
+- ArrayList<Bag> allBags
+- ArrayList<Transaction> transactions
+- MachineRoom[] machineRooms
+- String adminPassword
+- int transactionCounter
++ boolean adminLogin(String)
++ ArrayList<Customer> getCustomers()
++ ArrayList<Bag> getAllBags()
++ ArrayList<Transaction> getTransactions()
++ Floor[] getFloors()
++ MachineRoom[] getMachineRooms()
++ void addCustomer(String,String,String)
++ Customer findCustomer(String)
++ boolean storeBag(String,String,double,String,String)
++ void storeMultipleBags(String,int,Scanner)
++ void retrieveBag(String,String)
++ void retrieveMultipleBags(int,String,Scanner)
+- void displayMultipleInvoice(ArrayList<String>,double,String,int,int,int)
++ Bag findBag(String)
++ void searchBagByMarking(String)
+- void removeBagFromRack(Bag)
+- void displayInvoice(Bag,double,String)
++ void getCustomerBags(String)
++ void displayStorageStatistics()
+- int getActiveBagCount()
++ void displayFloorDetails(int)
++ void displayTransactionHistory()
++ void displayMachineStatus()
++ void toggleMachine(int)
+}
+
+
+class Main {
++ {static} void main(String[])
+- {static} void displayMenu()
+}
+
+class Rack {
+- String rackID
+- Slot[] slots
+- double maxWeightCapacity
+- double currentWeight
+- int totalSlots
++ boolean canStoreBag(double)
++ int findEmptySlot()
++ boolean storeBag(Bag,int)
++ Bag removeBag(int)
++ int getEmptySlotCount()
++ String getRackID()
++ Slot[] getSlots()
++ double getCurrentWeight()
++ double getMaxWeightCapacity()
++ int getTotalSlots()
+}
+
+
+class Bag {
+- String bagID
+- String foodTypeMarking
+- double weight
+- String itemType
+- String storageDate
+- String retrievalDate
+- String customerID
+- String status
+- double totalPrice
+- String rackLocation
+- void calculatePrice()
++ String getBagID()
++ String getFoodTypeMarking()
++ double getWeight()
++ String getItemType()
++ String getStorageDate()
++ String getRetrievalDate()
++ String getCustomerID()
++ String getStatus()
++ double getTotalPrice()
++ String getRackLocation()
++ void setRetrievalDate(String)
++ void setStatus(String)
++ void setRackLocation(String)
++ void displayBagInfo()
+}
+
+
+class MachineRoom {
+- String machineID
+- boolean isOn
+- int floorNumber
++ void turnOn()
++ void turnOff()
++ void displayStatus()
++ String getMachineID()
++ boolean isOn()
++ int getFloorNumber()
+}
+
+
+class Customer {
+- String customerID
+- String name
+- String phone
+- String address
+- int totalBagsStored
++ void incrementBagCount()
++ void decrementBagCount()
++ String getCustomerID()
++ String getName()
++ String getPhone()
++ String getAddress()
++ int getTotalBagsStored()
++ void displayCustomerInfo()
+}
+
+
+class Slot {
+- int slotNumber
+- boolean isEmpty
+- Bag bagStored
++ boolean storeBag(Bag)
++ Bag removeBag()
++ int getSlotNumber()
++ boolean isEmpty()
++ Bag getBagStored()
+}
+
+
+class ColdStorageGUI {
+- ColdStorage coldStorage
+- Stage primaryStage
+- String PRIMARY_COLOR
+- String BACKGROUND_COLOR
+- String TEXT_COLOR
++ void start(Stage)
+- Scene createLoginScene()
+- Scene createMainMenuScene()
+- Scene createCustomerScene()
+- Scene createStorageScene()
+- Scene createMultipleStorageScene()
+- Scene createRetrievalScene()
+- Scene createMultipleRetrievalScene()
+- Scene createSearchScene()
+- Scene createReportsScene()
+- void showMachineControl()
+- void updateMachineStatus(TextArea)
+- Button createStyledButton(String)
+- Button createMenuButton(String)
+- void showAlert(String,String,Alert.AlertType)
++ {static} void main(String[])
+}
+
+
+class Floor {
+- int floorNumber
+- Rack[] racks
+- int totalRacks
++ int findEmptyRack()
++ int getFloorNumber()
++ Rack[] getRacks()
++ int getTotalRacks()
+}
+
+
+class Transaction {
+- String transactionID
+- String bagID
+- String customerID
+- String type
+- String date
+- double amount
++ void displayTransaction()
++ String getTransactionID()
++ String getBagID()
++ String getCustomerID()
++ String getType()
++ String getDate()
++ double getAmount()
+}
+
+
+
+
+javafx.application.Application <|-- ColdStorageGUI
+@enduml
